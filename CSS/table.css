@@ -1,0 +1,16 @@
+table {
+    width: 97.8%;
+    border-collapse: collapse;
+}
+
+tr,
+th,
+td {
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+thead {
+    background: teal;
+    color: white;
+}
