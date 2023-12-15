@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="../css/product.css">
+    <link rel="stylesheet" href="../css/table.css">
+</head>
+
+<body>
+    <nav>
+        <div class="nav-left">
+            <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+            <h1>POS SYSTEM</h1>
+        </div>
+        <div class="main-menu">
+            <a href="../index.html" class="dashbord">
+                <i class="fa fa-table" aria-hidden="true"></i>
+                <label>Dashbord</label>
+            </a>
+            <a href="#" class="all-products">
+                <i class="fa fa-tasks" aria-hidden="true"></i>
+                <label>Product</label>
+            </a>
+            <a href="../page/category.html" class="categories">
+                <i class="fa fa-database" aria-hidden="true"></i>
+                <label>Categories</label>
+            </a>
+            <a href="#" class="order">
+                <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                <label>Order</label>
+            </a>
+        </div>
+    </nav>
+    <div class="products">
+        <div class="categoriesShow">
+            <button>
+                <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                <label style="cursor: pointer;" class="addproduct">Product</label>
+            </button>
+            <div class="label">
+                <label>Category : </label>
+                <select id="cars" name="carlist" form="carform">
+                    <option value="volvo">All Categories</option>
+                    <option value="saab">Saab</option>
+                    <option value="opel">Opel</option>
+                    <option value="audi">Audi</option>
+                </select>
+            </div>
+            <input type="text" placeholder="  Enter here" id="t">
+        </div>
+        <table id="tableProduct">
+            <thead>
+                <tr>
+                    <th>Product Id</th>
+                    <th>Product Name</th>
+                    <th>Category</th>
+                    <th>Quentity</th>
+                    <th>Prize</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="productsTbody">
+                <!-- <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="td">
+                        <img src="./image/trash.png" alt="">
+                        <img src="./image/1159633.png" alt="">
+                        <img src="./image/detail.png" alt="">
+                    </td>
+                </tr> -->
+            </tbody>
+        </table>
+        <div class="addProduct" style="display: none;">
+            <div class="menu">
+                <input type="text" placeholder="Product name" id="name">
+                <input type="text" placeholder="Product ID" id="picture">
+                <input type="text" placeholder="Product price" id="text-area">
+                <select name="" id="">
+                    <option value="">Select Category</option>
+                </select>
+                <input type="number" placeholder="Product price" id="price">
+                <input type="number" placeholder="Product Quantity" id="number">
+                <input type="text" placeholder="Product total" id="total">
+                <div class="btn">
+                    <button>Cancel</button>
+                    <button>Post</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/product.js"></script>
+</body>
+
+</html>
