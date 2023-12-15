@@ -1,0 +1,72 @@
+/* styles.css */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    background: teal;
+    color: white;
+    height: 11vh;
+}
+
+.nav-left {
+    width: 50%;
+    margin-left: 30px;
+}
+
+nav .nav-left i {
+    font-size: 50px;
+}
+
+nav .nav-left i,
+nav h1 {
+    position: absolute;
+    top: 0;
+    opacity: 1;
+    transition: left 1s ease-in-out;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+nav .nav-left i {
+    top: 1%;
+}
+
+nav .nav-left h1 {
+    top: 3%;
+    margin-left: 70px;
+}
+a{
+    text-decoration: none;
+    color: white;
+}
+.dashbord,
+.all-products,
+.categories,
+.order {
+    padding: 25px 20px;
+    font-weight: bold;
+    font-size: 20px;
+    border-bottom: 4px solid rgb(9, 9, 9);
+    cursor: pointer;
+}
+
+.dashbord:hover,
+.all-products:hover,
+.categories:hover,
+.order:hover {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+.main-menu {
+    display: flex;
+    align-items: center;
+    background: teal;
+}
