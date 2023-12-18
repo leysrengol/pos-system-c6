@@ -1,15 +1,9 @@
-// let arrOfProducts = {
-//   product: [],
-//   categories: [],
-//   cart:[],
-//   order:[]
-// };
-// Retrieve data from localStorage
+
 let categoriesData = JSON.parse(localStorage.getItem('productsData'));
 
 // Select necessary elements
 const calculateTotal = document.querySelector('.tot');
-const rightTable = document.getElementById('rightTable');
+const rightTable = document.querySelector('#rightTable tbody');
 let sumallTotal = 0;
 
 function createTableFromCart() {
@@ -154,7 +148,6 @@ checkoutButton.addEventListener('click', function(event) {
   }
 });
 let mainCard = document.querySelector('.onleft');
-// mainCard.textContent='';
 function createCardCustomer(){
   for (let data of arrOfProduct.order){
     let card = document.createElement('div');
@@ -171,7 +164,6 @@ function createCardCustomer(){
     card.appendChild(h2total);
     card.appendChild(detailProduct);
     mainCard.appendChild(card);
-    
   }
 }
 createCardCustomer();

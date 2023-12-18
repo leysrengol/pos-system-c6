@@ -70,3 +70,6 @@ a{
     align-items: center;
     background: teal;
 }
+ul li {
+    list-style: none;
+}
