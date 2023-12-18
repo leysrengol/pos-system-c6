@@ -44,55 +44,38 @@
             </button>
             <div class="label">
                 <label>Category : </label>
-                <select id="cars" name="carlist" form="carform">
-                    <option value="volvo">All Categories</option>
-                    <option value="saab">Saab</option>
-                    <option value="opel">Opel</option>
-                    <option value="audi">Audi</option>
+                <select id="optionOF" name="options" form="carform">
                 </select>
             </div>
             <input type="text" placeholder="  Enter here" id="t">
         </div>
-        <table id="tableProduct">
-            <thead>
-                <tr>
-                    <th>Product Id</th>
-                    <th>Product Name</th>
-                    <th>Category</th>
-                    <th>Quentity</th>
-                    <th>Prize</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody id="productsTbody">
-                <!-- <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="td">
-                        <img src="./image/trash.png" alt="">
-                        <img src="./image/1159633.png" alt="">
-                        <img src="./image/detail.png" alt="">
-                    </td>
-                </tr> -->
-            </tbody>
-        </table>
-        <div class="addProduct" style="display: none;">
-            <div class="menu">
-                <input type="text" placeholder="Product name" id="name">
-                <input type="text" placeholder="Product ID" id="picture">
-                <input type="text" placeholder="Product price" id="text-area">
-                <select name="" id="">
-                    <option value="">Select Category</option>
-                </select>
-                <input type="number" placeholder="Product price" id="price">
-                <input type="number" placeholder="Product Quantity" id="number">
-                <input type="text" placeholder="Product total" id="total">
-                <div class="btn">
-                    <button>Cancel</button>
-                    <button>Post</button>
+        <div class="tab">
+            <table id="tableProduct">
+                <thead>
+                    <tr>
+                        <th>Product Id</th>
+                        <th>Product Name</th>
+                        <th>Category</th>
+                        <th>Quentity</th>
+                        <th>Prize</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="productsTbody"></tbody>
+            </table>
+            <div class="addProduct" style="display: none;">
+                <div class="menu">
+                    <input type="text" placeholder="Product name" id="name">
+                    <input type="number" placeholder="Product ID" id="picture">
+                    <select name="" id="select">
+                        <option value="">All product</option>
+                    </select>
+                    <input type="number" placeholder="Product Quantity" id="quantity">
+                    <input type="number" placeholder="Product price" id="price">
+                    <div class="btn">
+                        <button>Cancel</button>
+                        <button id="btnPost">Post</button>
+                    </div>
                 </div>
             </div>
         </div>
