@@ -165,7 +165,6 @@ function editProduct(productId) {
     const index = arrOfProducts.product.findIndex(product => product.id === productId);
 
     if (index === -1) {
-        console.error('Product not found!');
         return;
     }
 
@@ -189,7 +188,6 @@ function updateProduct(event) {
     const index = arrOfProducts.product.findIndex(product => product.id === productIdToUpdate);
 
     if (index === -1) {
-        console.error('Product not found for update!');
         return;
     }
 

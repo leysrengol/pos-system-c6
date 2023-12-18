@@ -6,14 +6,22 @@
 }
 
 .onleft {
-    display: block;
-    width: 40%;
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+    flex-wrap: wrap;
+    height: 80vh;
+    overflow-y: scroll;
 }
-
-.onleft input[type="number"] {
-    width: 100%;
+.card{
+    width: 90%;
+    height: 50%;
+    border: 1px solid teal;
+    background: rgb(187, 181, 181);
+    border-radius: 5px;
+    padding: 5px;
+    margin-bottom: 10px;
 }
-
 .scrooll{
     overflow-y: scroll;
     height: 50vh;
@@ -54,7 +62,7 @@ hr {
     border-radius: 4px;
 }
 .onright button{
-    margin-top: 50px;
+    margin-top: 30px;
     border-radius: 5px;
     outline: none;
     border: none;
