@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="../css/order.css">
     <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="../css/table.css">
+    <script src="../js/order.js" defer></script>
 </head>
 <body>
     <nav>
@@ -35,19 +37,47 @@
     </nav>
     <div class="orders">
         <div class="onleft">
-            <input type="number" name="" placeholder="Enter Id product">
-            <div class="order-card">
-                <h3>Banana</h3>
-                <div>
-                    <p>quentity :s</p>
-
-                </div>
-                <button>ADD TO CART</button>
-            </div>
+            <input type="number" name="" placeholder="Enter Id product" id="searchInput">
+            <table>
+                <thead>
+                    <tr>
+                        <th> Id</th>
+                        <th> Name</th>
+                        <th>Category</th>
+                        <th>Quentity</th>
+                        <th>Prize</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="leftTable"></tbody>
+            </table>
         </div>
         <hr>
         <div class="onright">
+            <h1>Your Cart</h1>
+            <div class="scrooll">
 
+                <table id="rightTable">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Quantity</th>
+                            <th>instock</th>
+                            <th>Price</th>
+                            <th>Total</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <div class="text">
+                <h2>Total: </h2>
+                <h2 class="tot"></h2>
+                <input type="text" placeholder="Customer Name" id="customer-name">;
+
+            </div>
+            <button style="cursor: pointer;">Check Out</button>
         </div>
     </div>
 </body>
