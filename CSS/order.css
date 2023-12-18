@@ -7,7 +7,7 @@
 
 .onleft {
     display: flex;
-    justify-content: space-between;
+    justify-content:space-between;
     width: 50%;
     flex-wrap: wrap;
     height: 80vh;
@@ -17,11 +17,16 @@
     width: 90%;
     height: 50%;
     border: 1px solid teal;
-    background: rgb(187, 181, 181);
+    /* background: rgb(187, 181, 181); */
     border-radius: 5px;
     padding: 5px;
     margin-bottom: 10px;
+    box-shadow: 0 0 10px black;
+    
 }
+.total,.name{
+    margin-bottom: 40px;
+}   
 .scrooll{
     overflow-y: scroll;
     height: 50vh;
@@ -41,7 +46,7 @@
 
 hr {
     border: 3px solid black;
-    height: 83vh;
+    height: 12vh;
     margin-left: 20px;
 }
 .menu {

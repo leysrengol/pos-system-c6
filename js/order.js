@@ -1,3 +1,9 @@
+// let arrOfProducts = {
+//   product: [],
+//   categories: [],
+//   cart:[],
+//   order:[]
+// };
 // Retrieve data from localStorage
 let categoriesData = JSON.parse(localStorage.getItem('productsData'));
 
@@ -92,35 +98,83 @@ function displayCartItems() {
 
 displayCartItems();
 
-// Other functions such as getOrderDetails, showOrderDetails, placeOrder, clearform remain unchanged...
 function getOrderDetails() {
   let orderDetails = '';
   if (categoriesData && categoriesData.cart) {
     categoriesData.cart.forEach(product => {
-      orderDetails += `${product.name} - ${product.quantity} x $${product.price}\n`;
+      orderDetails += `${product.name}- ${product.quantity} x $${product.price}\n`;
     });
   }
   return orderDetails;
 }
 function clearform() {
+  // Set categoriesData.cart to an empty array
   categoriesData.cart = [];
-  localStorage.setItem('productsData', JSON.stringify(categoriesData)); // Update localStorage data
-  rightTable.innerHTML = ''; // Clear the table content
+
+  // Update only the 'cart' property in 'productsData' in local storage
+  let dataFromLocalStorage = JSON.parse(localStorage.getItem('productsData'));
+  if (dataFromLocalStorage) {
+    dataFromLocalStorage.cart = [];
+    localStorage.setItem('productsData', JSON.stringify(dataFromLocalStorage));
+  }
+
+  // Clear the table content and reset sumallTotal
+  rightTable.innerHTML = '';
   sumallTotal = 0;
   updateTotal(sumallTotal);
   location.reload();
 }
-// Event listener for the checkout button
+
+
 const checkoutButton = document.querySelector('.onright').lastElementChild;
-checkoutButton.addEventListener('click', function (event) {
+let arrOfProduct = JSON.parse(localStorage.getItem('productsData'));
+// console.log(arrOfProduct.order);
+
+// Function to handle checkout button click event
+checkoutButton.addEventListener('click', function(event) {
   event.preventDefault();
   let customerInput = document.getElementById('customer-name');
   const customerName = customerInput.value.trim();
+  
   if (customerName !== '') {
-    const orderDetails = getOrderDetails();
+    const orderDetails = getOrderDetails(); 
     alert(`Customer Name: ${customerName}\nTotal: $${sumallTotal}\nOrder Details:\n${orderDetails}\nThank You for shopping with us.`);
+    
+    let CartsData = {
+      name: customerName,
+      total: sumallTotal,
+      details:orderDetails,
+      
+    };
+    arrOfProduct.order.push(CartsData);
+    localStorage.setItem('productsData', JSON.stringify(arrOfProduct));
     clearform();
   } else {
     alert('Please enter your name before placing the order.');
   }
 });
+let mainCard = document.querySelector('.onleft');
+// mainCard.textContent='';
+function createCardCustomer(){
+  for (let data of arrOfProduct.order){
+    let card = document.createElement('div');
+    card.className= "card";
+    let h2 =document.createElement("h2");
+    h2.className='name';
+    h2.textContent="Customer name : " +data.name ;
+    let h2total = document.createElement('h2');
+    h2total.className='total';
+    h2total.textContent ="Total amount : $" + data.total;
+    let detailProduct = document.createElement('p');
+    detailProduct.textContent = data.details
+    card.appendChild(h2);
+    card.appendChild(h2total);
+    card.appendChild(detailProduct);
+    mainCard.appendChild(card);
+    
+  }
+}
+createCardCustomer();
+
+
+
