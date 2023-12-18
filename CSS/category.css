@@ -64,7 +64,7 @@
     overflow-y: scroll;
 }
 .categoriesShow input[type="text"],
-.ongategory input[type="text"],
+.ongategory input[type="number"],
 .onleft input[type="number"],
 .createGategory input {
     padding: 12px 5px;
@@ -75,6 +75,9 @@
     outline: none;
     border: none;
     border-bottom: 3px solid black;
+}
+.ongategory input[type="number"]{
+    width: 400px;
 }
 button {
     background-color: teal;
