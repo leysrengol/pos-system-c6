@@ -1,6 +1,7 @@
 let categoriesData = JSON.parse(localStorage.getItem('productsData'));
 const calculateTotal = document.querySelector('.tot');
 const rightTable = document.querySelector('#rightTable tbody');
+let mainCard = document.querySelector('.onleft');
 let sumallTotal = 0;
 let newQuantity = [];
 
@@ -55,7 +56,7 @@ function createTableFromCart() {
             const newTotal = price * newQuantityValue;
             tdTotal.textContent = newTotal + ' $';
             sumallTotal = sumallTotal - prevTotal + newTotal;
-            newQuantity[product.id] = newQuantityValue; 
+            newQuantity[product.id] = newQuantityValue;
           }
         }
         updateTotal(sumallTotal);
@@ -113,7 +114,9 @@ const checkoutButton = document.querySelector('.onright').lastElementChild;
 let arrOfProduct = JSON.parse(localStorage.getItem('productsData'));
 
 // Event listener for the checkout button
-checkoutButton.addEventListener('click', function (event) {
+checkoutButton.addEventListener('click', checkOutAlert)
+
+function checkOutAlert(event) {
   event.preventDefault();
   let customerInput = document.getElementById('customer-name');
   const customerName = customerInput.value.trim();
@@ -140,10 +143,10 @@ checkoutButton.addEventListener('click', function (event) {
   } else {
     alert('Please enter your name before placing the order.');
   }
-});
+};
 
-let mainCard = document.querySelector('.onleft');
 
+// /////////////////////////Create Card History//////////////////////////
 function createCardCustomer() {
   for (let data of arrOfProduct.order) {
     let card = document.createElement('div');

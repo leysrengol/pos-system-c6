@@ -1,15 +1,12 @@
-// Retrieve data from local storage
 let categoriesData = JSON.parse(localStorage.getItem('productsData'));
 
-// Query selectors for elements in your HTML
 let productInstock = document.querySelector('.instock').lastElementChild;
 let productSellOut = document.querySelector('.Sellout').lastElementChild;
 let inCome = document.querySelector('.income').lastElementChild;
 let Product = document.querySelector('.products').lastElementChild;
 let Category = document.querySelector('.category').lastElementChild;
 
-// Retrieve products and sellout data from categoriesData or set defaults to empty arrays
-let instockProduct = categoriesData && categoriesData.product ? categoriesData.product : [];
+let instockProduct = categoriesData.product;
 let selloutProduct = categoriesData.product;
 console.log(selloutProduct);
 // Initialize variables for quantity in stock and sellout
@@ -38,14 +35,14 @@ function showTypeOfProduct() {
 
 // Function to display the number of categories
 function showCategory() {
-  Category.textContent = categoriesData && categoriesData.categories ? categoriesData.categories.length : 0;
+  Category.textContent = categoriesData.categories.length;
 }
 
-// Function to display total sellout quantity
+
 function showSellout() {
   productSellOut.textContent = sellout;
 }
-
+/////////////////show Income////////////////////////////////
 function showIncome (){
   let media = 0;
   for (let data of selloutProduct) {
@@ -56,15 +53,12 @@ function showIncome (){
   inCome.textContent = incomes + '    $';
 }
 
-// Function to display top 3 products in a table
+///////////////////////display top 3 //////////////////////
 function displayTopProducts() {
-  selloutProduct.sort((a, b) => b.sellout - a.sellout); // Sort products by sellout quantity
-
+  selloutProduct.sort((a, b) => b.sellout - a.sellout);
   const tableBody = document.querySelector('#myTable tbody');
-
   for (let i = 0; i < 3 && i < selloutProduct.length; i++) {
     const product = selloutProduct[i];
-
     const row = document.createElement('tr');
     row.innerHTML = `
       <td>${i + 1}</td>
