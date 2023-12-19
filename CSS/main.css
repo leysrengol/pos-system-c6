@@ -34,6 +34,14 @@ main {
     border-radius: 10px;
 }
 
+ul:hover {
+    background-color: teal; 
+    color: white; 
+    padding: 40px 25px; 
+    transition: all 0.3s ease;
+    border-radius: 8px; 
+}
+
 .top-products {
     margin-top: 30px;
     padding-left: 30px;

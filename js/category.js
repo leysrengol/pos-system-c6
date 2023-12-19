@@ -18,13 +18,16 @@ let tbodyCategory = document.getElementById('tableCategory').lastElementChild;
 let btnCreateCategory = document.getElementById('btnCategory');
 let idCategory = document.getElementById('idCategory');
 let nameCategory = document.getElementById('nameCategory');
-const rows = document.querySelectorAll('#tableCategory tbody tr');
+let rows = document.querySelectorAll('#tableCategory tbody tr');
+let categoriesData = JSON.parse(localStorage.getItem('productsData'));
+let searchInput = document.getElementById('inputcate');
 
-// save product to local
+/////////////Save Product///////////////////////////
 function saveProducts() {
   localStorage.setItem('productsData', JSON.stringify(arrOfProducts));
 }
 
+////////////////////Load Product//////////////////
 function loadProducts() {
   let loadProducts = JSON.parse(localStorage.getItem('productsData'));
   if (loadProducts != null) {
@@ -34,6 +37,8 @@ function loadProducts() {
     saveProducts()
   }
 }
+
+////////////Create Category/////////////////////
 function createCategory() {
   tbodyCategory.textContent = '';
   for (let i = 0; i < arrOfProducts.categories.length; i++) {
@@ -74,11 +79,24 @@ function createCategory() {
       editCategory(i);
     });
     imgCheck.addEventListener('click', function () {
-      showCreationDate(i);
+      showProductCountInCategory(i);
     });
   }
 }
 
+function showProductCountInCategory(i) {
+  let categoryToCount = productss[i];
+  let productCount = 0;
+
+  for (let product of arrOfProducts.product) {
+    if (product.category === categoryToCount) {
+      productCount++;
+    }
+  }
+  alert(`Number of products in category ${categoryToCount}: ${productCount}`);
+}
+
+//////////////////Edit Category /////////////////////////
 function editCategory(index) {
   const categoryToEdit = arrOfProducts.categories[index];
   idCategory.value = categoryToEdit.id;
@@ -104,12 +122,14 @@ function editCategory(index) {
   });
 }
 
+//////////////Delete Category ////////////////////////
 function deleteCategory(index) {
   arrOfProducts.categories.splice(index, 1);
   saveProducts();
   createCategory();
 }
 
+/////////////Get Data To local Storage///////////////
 function AddProduct(event) {
   if (idCategory.value === '' || nameCategory.value === '') {
     alert('Please enter data in form!')
@@ -127,9 +147,7 @@ function AddProduct(event) {
   event.preventDefault();
 }
 
-let categoriesData = JSON.parse(localStorage.getItem('productsData'));
-const searchInput = document.getElementById('inputcate');
-// Function to filter categories based on input
+/////////////////Filter Category///////////////////////
 function filterCategories(searchTerm) {
   if (arrOfProducts.categories.length > 0) {
     const categoriesArray = arrOfProducts.categories;
@@ -144,6 +162,7 @@ function filterCategories(searchTerm) {
     }
   }
 }
+
 searchInput.addEventListener('input', function (event) {
   const searchTerm = event.target.value.trim();
   filterCategories(searchTerm);

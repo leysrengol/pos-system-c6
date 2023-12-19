@@ -9,39 +9,39 @@ let Category = document.querySelector('.category').lastElementChild;
 let instockProduct = categoriesData.product;
 let selloutProduct = categoriesData.product;
 console.log(selloutProduct);
-// Initialize variables for quantity in stock and sellout
 let instock = 0;
 let sellout = 0;
 let incomes = 0;
 
-// Function to calculate total quantity in stock
+///////////////Calculate Number Of Product/////////
 function sumAllProduct() {
   for (let data of instockProduct) {
     instock += parseInt(data['quantity']) || 0;
   }
 }
 
-// Function to calculate total sellout quantity
+////////////////SumSellOut Product///////////////////
 function sumSelloutProduct() {
   for (let data of selloutProduct) {
     sellout += parseInt(data['sellout']) || 0;
   }
 }
 
-// Function to display total number of product types
+/////////////////Display Number Product///////////////
 function showTypeOfProduct() {
   Product.textContent = instockProduct.length;
 }
 
-// Function to display the number of categories
+/////////////////Display Number Category///////////////
 function showCategory() {
   Category.textContent = categoriesData.categories.length;
 }
 
-
+/////////////////Show Sell Out/////////////////////////
 function showSellout() {
   productSellOut.textContent = sellout;
 }
+
 /////////////////show Income////////////////////////////////
 function showIncome (){
   let media = 0;
@@ -65,7 +65,7 @@ function displayTopProducts() {
       <td>${product.name}</td>
       <td>${product.category}</td>
       <td>${product.price}  $</td>
-      <td>${product.sellout}</td>
+      <td>${product.sellout*parseInt(product.price)} $</td>
     `;
 
     tableBody.appendChild(row);

@@ -2,9 +2,12 @@ let categoriesData = JSON.parse(localStorage.getItem('productsData'));
 const calculateTotal = document.querySelector('.tot');
 const rightTable = document.querySelector('#rightTable tbody');
 let mainCard = document.querySelector('.onleft');
+const checkoutButton = document.querySelector('.onright').lastElementChild;
+let arrOfProduct = JSON.parse(localStorage.getItem('productsData'));
 let sumallTotal = 0;
 let newQuantity = [];
 
+////////////////Create Table//////////////////
 function createTableFromCart() {
   rightTable.innerHTML = '';
   if (categoriesData && categoriesData.cart) {
@@ -69,12 +72,12 @@ function createTableFromCart() {
   }
 }
 
-// Function to update total amount
+////////////////Update Total///////////////////
 function updateTotal(total) {
   calculateTotal.textContent = total + ' $';
 }
 
-// Function to delete a row
+/////////////////Delete Row///////////////
 function deleteTableRow(event, row) {
   if (confirm("Are you sure you want to delete this item?")) {
     const productName = row.childNodes[0].textContent;
@@ -88,7 +91,7 @@ function deleteTableRow(event, row) {
   }
 }
 
-// Function to display items in the cart
+///////////Display Item///////////////////
 function displayCartItems() {
   if (categoriesData && categoriesData.cart) {
     createTableFromCart();
@@ -96,7 +99,7 @@ function displayCartItems() {
 }
 displayCartItems();
 
-// Function to clear the form
+//////////////////Clear Form////////////////
 function clearform() {
   categoriesData.cart = [];
   let dataFromLocalStorage = JSON.parse(localStorage.getItem('productsData'));
@@ -109,13 +112,9 @@ function clearform() {
   updateTotal(sumallTotal);
   location.reload();
 }
-
-const checkoutButton = document.querySelector('.onright').lastElementChild;
-let arrOfProduct = JSON.parse(localStorage.getItem('productsData'));
-
-// Event listener for the checkout button
 checkoutButton.addEventListener('click', checkOutAlert)
 
+///////////Check Alert////////////////////////
 function checkOutAlert(event) {
   event.preventDefault();
   let customerInput = document.getElementById('customer-name');
@@ -165,4 +164,5 @@ function createCardCustomer() {
     mainCard.appendChild(card);
   }
 }
+
 createCardCustomer();

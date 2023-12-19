@@ -18,6 +18,7 @@ let total = document.getElementById('total');
 let productsTbody = document.getElementById('productsTbody');
 let btnPost = document.getElementById('btnPost');
 const storedData = JSON.parse(localStorage.getItem('productsData'));
+let allTr = document.querySelectorAll('#productsTbody tr');
 let categoryProduct = document.getElementById('select');
 let productss = storedData.categories;
 
@@ -68,6 +69,8 @@ for (let category of productss) {
 }
 
 selectElement.addEventListener('change', filterTableRows);
+
+///////////////Filter TableRow////////////////////
 function filterTableRows() {
     let selectedCategory = selectElement.value.toLowerCase();
     for (const row of tableRows) {
@@ -84,6 +87,7 @@ function filterTableRows() {
     }
 }
 
+//////////Create Product////////////////////
 function createProduct() {
     productsTbody.textContent = "";
     for (let product of arrOfProducts.product) {
@@ -121,7 +125,6 @@ function createProduct() {
         tdPrice.textContent = product.price + '  $';
         tdID.textContent = product.id;
 
-        // Logic to check if the product ID exists in the order
         const orderIds = arrOfProducts.order.map(order => order.ids).flat();
         if (orderIds.includes(product.id)) {
             const soldQuantity = arrOfProducts.order
@@ -161,12 +164,15 @@ function createProduct() {
         productsTbody.appendChild(tr);
     }
 }
+
+//////////Delete Product//////////
 function deleteProduct(productId) {
     arrOfProducts.product = arrOfProducts.product.filter(product => product.id !== productId);
     saveProducts();
     createProduct();
 }
 
+////////////Add To Cart////////////
 function addToCart(product) {
     const existingProduct = arrOfProducts.cart.find(item => item.id === product.id);
     if (existingProduct) {
@@ -179,6 +185,7 @@ function addToCart(product) {
     }
 }
 
+///////////////Edit Product////////////
 function editProduct(productId) {
     const index = arrOfProducts.product.findIndex(product => product.id === productId);
 
@@ -199,6 +206,7 @@ function editProduct(productId) {
     btnPost.addEventListener('click', updateProduct);
 }
 
+///////////Update Product////////////
 function updateProduct(event) {
     event.preventDefault();
     const productIdToUpdate = pictureProduct.value;
@@ -242,6 +250,7 @@ function updateProduct(event) {
 
     hideForm();
 }
+//////////////////Add Data to LocalStorage/////////////////
 function addProduct(event) {
     if (namesProduct.value === '' || pictureProduct.value === '' || quantityProduct.value === '' || priceProduct.value === '') {
         alert('Please enter data in form!');
@@ -273,7 +282,7 @@ function addProduct(event) {
     event.preventDefault();
 }
 
-// Function to update 'sellout' property based on existing order data
+//////////////Update Sellout/////////////////
 function updateSellout() {
     for (let product of arrOfProducts.product) {
         const orderIds = arrOfProducts.order.map(order => order.ids).flat();
@@ -287,10 +296,8 @@ function updateSellout() {
             product.sellout = 0;
         }
     }
-    saveProducts(); // Save the updated data with 'sellout' property to local storage
+    saveProducts();
 }
-
-
 
 btnAddProduct.addEventListener("click", showForm);
 btnCancel.addEventListener("click", hideForm);
@@ -298,16 +305,3 @@ btnPost.addEventListener("click", addProduct);
 
 loadProducts();
 createProduct();
-let Income = 0;
-let Expenses = 0;
-
-let allTr = document.querySelectorAll('#productsTbody tr');
-for (let tr of allTr) {
-    let fifthTd = tr.querySelector('td:nth-child(5)');
-    let sixthTd = tr.querySelector('td:nth-child(6)');
-    if (fifthTd && sixthTd) {
-        let concatenatedText = parseInt(fifthTd.textContent) * parseInt(sixthTd.textContent);
-        Income += concatenatedText;
-        Expenses += parseInt(fifthTd.textContent);
-    }
-}
