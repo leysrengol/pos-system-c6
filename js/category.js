@@ -2,7 +2,8 @@ let arrOfProducts = {
   product: [],
   categories: [],
   cart:[],
-  order:[]
+  order:[],
+  sellout:[]
 };
 
 let topProduct = document.querySelector('.container');
@@ -17,6 +18,7 @@ let tbodyCategory = document.getElementById('tableCategory').lastElementChild;
 let btnCreateCategory = document.getElementById('btnCategory');
 let idCategory = document.getElementById('idCategory');
 let nameCategory = document.getElementById('nameCategory');
+const rows = document.querySelectorAll('#tableCategory tbody tr');
 
 // save product to local
 function saveProducts() {
@@ -82,7 +84,7 @@ function editCategory(index) {
   idCategory.value = categoryToEdit.id;
   nameCategory.value = categoryToEdit.names;
 
-  btnCreateCategory.removeEventListener('click', AddProduct); // Remove the previous event listener
+  btnCreateCategory.removeEventListener('click', AddProduct);
   btnCreateCategory.textContent = 'Update';
   btnCreateCategory.addEventListener('click', function (event) {
     event.preventDefault();
@@ -107,8 +109,6 @@ function deleteCategory(index) {
   saveProducts();
   createCategory();
 }
-
-const rows = document.querySelectorAll('#tableCategory tbody tr');
 
 function AddProduct(event) {
   if (idCategory.value === '' || nameCategory.value === '') {

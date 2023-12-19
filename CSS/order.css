@@ -39,11 +39,6 @@
     text-decoration: underline;
     margin-top: 10px;
 }
-/* .tot{
-    margin-top: 30px;
-    font-size: 30px;
-} */
-
 hr {
     border: 3px solid black;
     height: 12vh;
@@ -101,7 +96,6 @@ table{
     cursor: pointer;
 }
 .canclebtn{
-    /* width: 60px; */
     color: white;
     background: red;
     border-radius: 5px;

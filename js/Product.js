@@ -2,7 +2,7 @@ let arrOfProducts = {
     product: [],
     categories: [],
     cart: [],
-    order:[]
+    order: []
 };
 
 let addProductNews = document.querySelector('.addProduct');
@@ -21,6 +21,7 @@ const storedData = JSON.parse(localStorage.getItem('productsData'));
 let categoryProduct = document.getElementById('select');
 let productss = storedData.categories;
 
+
 if (storedData && storedData.product && Array.isArray(storedData.product)) {
     arrOfProducts.product = storedData.product;
 }
@@ -33,6 +34,7 @@ function loadProducts() {
     let loadProducts = JSON.parse(localStorage.getItem('productsData'));
     if (loadProducts !== null) {
         arrOfProducts = loadProducts;
+        updateSellout();
     } else {
         saveProducts();
     }
@@ -72,7 +74,7 @@ function filterTableRows() {
         let categoryCellText = row.firstElementChild.nextElementSibling.nextElementSibling.textContent.toLowerCase();
         if (selectedCategory !== 'all product') {
             if (categoryCellText === selectedCategory) {
-                row.style.display = ''; 
+                row.style.display = '';
             } else {
                 row.style.display = 'none';
             }
@@ -91,10 +93,12 @@ function createProduct() {
         let tdCategory = document.createElement("td");
         let tdTotal = document.createElement("td");
         let tdPrice = document.createElement("td");
+        let tdSold = document.createElement("td");
         let tdAction = document.createElement("td");
         let imgTrash = document.createElement('img');
         let imgEdit = document.createElement('img');
         let imgCheck = document.createElement('img');
+
         selectElement.textContent = '';
         const firstoption = document.createElement('option');
         firstoption.textContent = 'All Product';
@@ -105,16 +109,30 @@ function createProduct() {
             option.textContent = category['names'];
             selectElement.appendChild(option);
         }
+
         tdAction.setAttribute("class", "td");
         imgTrash.src = "../image/trash.png";
         imgEdit.src = "../image/1159633.png";
         imgCheck.src = "../image/book.png";
-
+        tdSold.textContent = 0;
         tdProductName.textContent = product.name;
         tdCategory.textContent = product.category;
         tdTotal.textContent = product.quantity;
         tdPrice.textContent = product.price + '  $';
         tdID.textContent = product.id;
+
+        // Logic to check if the product ID exists in the order
+        const orderIds = arrOfProducts.order.map(order => order.ids).flat();
+        if (orderIds.includes(product.id)) {
+            const soldQuantity = arrOfProducts.order
+                .filter(order => order.ids.includes(product.id))
+                .reduce((acc, order) => acc + parseInt(order.total), 0);
+            const totalSold = Math.floor(soldQuantity / product.price);
+            tdSold.textContent = totalSold;
+        } else {
+            tdSold.textContent = 0;
+        }
+
         imgCheck.addEventListener('click', function () {
             if (confirm('Are you sure to add it to cart?')) {
                 addToCart(product);
@@ -122,7 +140,7 @@ function createProduct() {
         });
         imgTrash.onclick = function () {
             if (confirm("Are you sure you want to delete this category?")) {
-                deleteProduct(product.id); 
+                deleteProduct(product.id);
             }
         };
         imgEdit.onclick = function () {
@@ -136,13 +154,13 @@ function createProduct() {
         tr.appendChild(tdProductName);
         tr.appendChild(tdCategory);
         tr.appendChild(tdTotal);
+        tr.appendChild(tdSold);
         tr.appendChild(tdPrice);
         tr.appendChild(tdAction);
 
         productsTbody.appendChild(tr);
     }
 }
-
 function deleteProduct(productId) {
     arrOfProducts.product = arrOfProducts.product.filter(product => product.id !== productId);
     saveProducts();
@@ -155,9 +173,9 @@ function addToCart(product) {
         alert('This product is already in the cart!');
         return;
     }
-    else{
+    else {
         arrOfProducts.cart.push(product);
-        saveProducts(); 
+        saveProducts();
     }
 }
 
@@ -224,25 +242,25 @@ function updateProduct(event) {
 
     hideForm();
 }
-
-
 function addProduct(event) {
-
     if (namesProduct.value === '' || pictureProduct.value === '' || quantityProduct.value === '' || priceProduct.value === '') {
-        alert('Please enter data in form!')
+        alert('Please enter data in form!');
         return;
     }
+
     // Create a new product using the input values
     let product = {
         name: namesProduct.value,
         id: pictureProduct.value,
         price: priceProduct.value,
         quantity: quantityProduct.value,
-        category: categoryProduct.value
+        category: categoryProduct.value,
+        sellout: 0
     };
 
     arrOfProducts.product.push(product);
     saveProducts();
+    updateSellout(); // Update 'sellout' values after adding a new product
     createProduct();
 
     namesProduct.value = "";
@@ -255,9 +273,41 @@ function addProduct(event) {
     event.preventDefault();
 }
 
+// Function to update 'sellout' property based on existing order data
+function updateSellout() {
+    for (let product of arrOfProducts.product) {
+        const orderIds = arrOfProducts.order.map(order => order.ids).flat();
+        if (orderIds.includes(product.id)) {
+            const soldQuantity = arrOfProducts.order
+                .filter(order => order.ids.includes(product.id))
+                .reduce((acc, order) => acc + parseInt(order.total), 0);
+            const totalSold = Math.floor(soldQuantity / product.price);
+            product.sellout = totalSold;
+        } else {
+            product.sellout = 0;
+        }
+    }
+    saveProducts(); // Save the updated data with 'sellout' property to local storage
+}
+
+
+
 btnAddProduct.addEventListener("click", showForm);
 btnCancel.addEventListener("click", hideForm);
 btnPost.addEventListener("click", addProduct);
 
-createProduct();
 loadProducts();
+createProduct();
+let Income = 0;
+let Expenses = 0;
+
+let allTr = document.querySelectorAll('#productsTbody tr');
+for (let tr of allTr) {
+    let fifthTd = tr.querySelector('td:nth-child(5)');
+    let sixthTd = tr.querySelector('td:nth-child(6)');
+    if (fifthTd && sixthTd) {
+        let concatenatedText = parseInt(fifthTd.textContent) * parseInt(sixthTd.textContent);
+        Income += concatenatedText;
+        Expenses += parseInt(fifthTd.textContent);
+    }
+}
