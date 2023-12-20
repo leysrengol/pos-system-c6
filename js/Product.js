@@ -113,7 +113,6 @@ function createProduct() {
             option.textContent = category['names'];
             selectElement.appendChild(option);
         }
-
         tdAction.setAttribute("class", "td");
         imgTrash.src = "../image/trash.png";
         imgEdit.src = "../image/1159633.png";
@@ -216,7 +215,6 @@ function updateProduct(event) {
     if (index === -1) {
         return;
     }
-
     if (
         namesProduct.value === '' ||
         pictureProduct.value === '' ||
@@ -236,6 +234,7 @@ function updateProduct(event) {
 
     saveProducts();
     createProduct();
+
     // Reset form fields and button text after update
     pictureProduct.value = '';
     priceProduct.value = '';
@@ -251,7 +250,7 @@ function updateProduct(event) {
 }
 //////////////////Add Data to LocalStorage/////////////////
 function addProduct(event) {
-    if (namesProduct.value === '' || pictureProduct.value === '' || quantityProduct.value === '' || priceProduct.value === '') {
+    if (namesProduct.value === '' ||  pictureProduct.value === '' || quantityProduct.value === '' || priceProduct.value === '') {
         alert('Please enter data in form!');
         return;
     }
