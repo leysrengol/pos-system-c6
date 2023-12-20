@@ -61,7 +61,7 @@ function displayTopProducts() {
     const product = selloutProduct[i];
     const row = document.createElement('tr');
     row.innerHTML = `
-      <td>${i + 1}</td>
+      <td>${product.id}</td>
       <td>${product.name}</td>
       <td>${product.category}</td>
       <td>${product.price}  $</td>
