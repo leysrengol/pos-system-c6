@@ -26,7 +26,6 @@ function sumSelloutProduct() {
     sellout += parseInt(data['sellout']) || 0;
   }
 }
-
 /////////////////Display Number Product///////////////
 function showTypeOfProduct() {
   Product.textContent = instockProduct.length;
