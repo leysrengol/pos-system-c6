@@ -236,7 +236,6 @@ function updateProduct(event) {
 
     saveProducts();
     createProduct();
-
     // Reset form fields and button text after update
     pictureProduct.value = '';
     priceProduct.value = '';
