@@ -65,8 +65,8 @@ function displayTopProducts() {
       <td>${product.name}</td>
       <td>${product.category}</td>
       <td>${product.price}  $</td>
-      <td>${product.sellout}</td>
-      <td>${product.sellout*parseInt(product.price)} $</td>
+      <td>${product.sellout}
+      <td>${parseInt(product.sellout) *parseInt(product.price)} $</td>
     `;
 
     tableBody.appendChild(row);

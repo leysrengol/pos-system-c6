@@ -144,7 +144,6 @@ function checkOutAlert(event) {
   }
 };
 
-
 // /////////////////////////Create Card History//////////////////////////
 function createCardCustomer() {
   for (let data of arrOfProduct.order) {

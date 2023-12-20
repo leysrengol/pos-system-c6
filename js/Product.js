@@ -127,10 +127,10 @@ function createProduct() {
 
         const orderIds = arrOfProducts.order.map(order => order.ids).flat();
         if (orderIds.includes(product.id)) {
-            const soldQuantity = arrOfProducts.order
+            let soldQuantity = arrOfProducts.order
                 .filter(order => order.ids.includes(product.id))
                 .reduce((acc, order) => acc + parseInt(order.total), 0);
-            const totalSold = Math.floor(soldQuantity / product.price);
+            let totalSold = Math.floor(parseInt(soldQuantity) / parseInt(product.price));
             tdSold.textContent = totalSold;
         } else {
             tdSold.textContent = 0;

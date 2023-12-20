@@ -3,7 +3,6 @@ let arrOfProducts = {
   categories: [],
   cart:[],
   order:[],
-  sellout:[]
 };
 
 let topProduct = document.querySelector('.container');
