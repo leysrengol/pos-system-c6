@@ -74,9 +74,13 @@ function createTableFromCart() {
 
 ////////////////Update Total///////////////////
 function updateTotal(total) {
-  calculateTotal.textContent = total + ' $';
+  if (total !== undefined) {
+    calculateTotal.textContent = total + ' $';
+  }
+  else {
+    calculateTotal.textContent = 0 + ' $';
+  }
 }
-
 /////////////////Delete Row///////////////
 function deleteTableRow(event, row) {
   if (confirm("Are you sure you want to delete this item?")) {
@@ -112,7 +116,7 @@ function clearform() {
   updateTotal(sumallTotal);
   location.reload();
 }
-checkoutButton.addEventListener('click', checkOutAlert)
+checkoutButton.addEventListener('click', checkOutAlert);
 
 ///////////Check Alert////////////////////////
 function checkOutAlert(event) {
